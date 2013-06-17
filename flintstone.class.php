@@ -53,7 +53,7 @@ class Flintstone {
 	 * @access public
 	 * @var array
 	 */
-	public $options = array('dir' => '', 'ext' => '.dat', 'gzip' => false, 'cache' => true, 'swap_memory_limit' => 1048576);
+	public $options = array('dir' => '', 'ext' => '.dat', 'gzip' => false, 'cache' => true, 'swap_memory_limit' => 1048576, 'readonly' => false);
 	
 	/**
 	 * Flintstone constructor
@@ -130,7 +130,7 @@ class Flintstone {
 			}
 			
 			// Check file is writable
-			if (!is_writable($this->data[$this->db]['file'])) {
+			if (!is_writable($this->data[$this->db]['file']) &&!$this->options['readonly']) {
 				throw new Exception('Could not write to database ' . $this->db);
 			}
 		}
